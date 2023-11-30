@@ -1,0 +1,40 @@
+<!-- carrito.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{master.html}">
+<head>
+    <!-- Add any necessary meta tags, title, and styles -->
+    <meta charset="utf-8">
+    <title>Carrito de Compras</title>
+    <!-- Add your stylesheets or inline styles here -->
+</head>
+<body>
+
+<div layout:fragment="content" class="container my-5">
+    <!-- Aquí va tu contenido actual -->
+
+    <!-- Agrega la tabla para mostrar los elementos del carrito -->
+    <h2>Carrito</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Itera sobre los elementos del carrito y muestra la información en la tabla -->
+            <tr th:each="item : ${itemsCarrito}">
+                <td th:text="${item.producto.descripcion}"></td>
+                <td th:text="${item.cantidad}"></td>
+                <td th:text="${item.producto.precio}"></td>
+                <td th:text="${item.calcularTotal()}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

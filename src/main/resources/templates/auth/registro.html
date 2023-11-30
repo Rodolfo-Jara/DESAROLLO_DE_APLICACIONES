@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Registro de usuarios</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous">
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-image: url(https://img.freepik.com/vector-premium/fondo-elementos-cine_1278-161.jpg?w=900);
+            background-size: cover;
+            background-position: 0px -50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .Form-box {
+            position: relative;
+            width: 400px;
+            height: 550px;
+            backdrop-filter: blur(40px);
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            border: 2px solid rgb(214, 211, 207);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform .6s ease, height .2s ease-in-out;
+        }
+
+        .Form-box form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transition: all .5s ease;
+        }
+
+        .input-box {
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 40px 0px;
+        }
+
+        .input-box input {
+            width: 90%;
+            position: absolute;
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            border: none;
+            background: none;
+            outline: none;
+        }
+
+        .input-box label {
+            transition: .4s;
+        }
+
+        .input-box input:focus ~ label,
+        .input-box input:valid ~ label {
+            transform: translateY(-25px);
+        }
+
+        .input-box ion-icon {
+            font-size: 25px;
+        }
+
+        .checkbox {
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .submit-btn {
+            width: 80%;
+            height: 30px;
+            cursor: pointer;
+            border-radius: 20px;
+            margin: 20px 0px;
+            border: none;
+            font-size: 16px;
+        }
+
+        .Form-box h5,
+        .checkbox label,
+        .checkbox input {
+            cursor: pointer;
+        }
+
+        .change-form {
+            height: 500px;
+        }
+
+        .change-form .Register-form {
+            transform: translateX(-100%);
+        }
+
+        /* Cambia el color del texto "Regístrate" a blanco */
+        h1 {
+            color: rgb(0, 0, 0);
+        }
+    </style>
+</head>
+<body>
+
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div th:if="${exito}">
+                <div class="alert alert-success">¡Te has registrado exitosamente a la aplicación!</div>
+            </div>
+
+            <div class="Form-box">
+                <form th:action="@{/auth/registro}" method="post" th:object="${usuario}" 
+                    <h1>Regístrate</h1>
+                    <div class="input-box">
+                        <label for="nombre"></label>
+                        <input placeholder="Nombre" id="nombre" type="text" class="form-control" th:field="*{nombre}"
+                               required autofocus="autofocus">
+                    </div>
+                    <div class="input-box">
+                        <label for="apellido"></label>
+                        <input placeholder="Apellidos" id="apellido" class="form-control" th:field="*{apellido}"
+                               required autofocus="autofocus">
+                    </div>
+                    <div class="input-box">
+                        <label for="email"></label>
+                        <input placeholder="Correo" id="email" type="email" class="form-control" th:field="*{email}"
+                               required autofocus="autofocus">
+                    </div>
+                    <div class="input-box">
+                        <label for="password"></label>
+                        <input placeholder="Contraseña" type="password" id="password" class="form-control"
+                               th:field="*{password}" required autofocus="autofocus">
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="register-checkbox">
+                        <label for="register-checkbox">Acepto los terminnos & condiciones</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <h5 class="Login-btn">Si estás registrado <a th:href="@{/login}">inicia sesión aquí</a></h5>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<script>
+    let register_btn = document.querySelector(".Register-btn");
+    let login_btn = document.querySelector(".Login-btn");
+    let form = document.querySelector(".Form-box");
+    register_btn.addEventListener("click", () => {
+  form.classList.remove("change-form");
+});
+
+</script>
+</body>
+</html>

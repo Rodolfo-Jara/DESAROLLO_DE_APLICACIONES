@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Editar Película</title>
+
+    <!-- Agrega los enlaces a los estilos de Bootstrap (CSS) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Agrega tus propios estilos si es necesario -->
+    <style>
+        /* Puedes agregar tus estilos personalizados aquí */
+       
+
+        /* Agrega más estilos según sea necesario */
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Editar Película</h2>
+
+        <form th:object="${pelicula}" th:action="@{/admin/update/{id}(id=${pelicula.id})}" method="post"
+            enctype="multipart/form-data">
+
+            <!-- Campos del formulario para la edición -->
+            <div class="form-group">
+                <label for="titulo">Título:</label>
+                <input type="text" th:field="*{titulo}" class="form-control" id="titulo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sinopsis">Sinopsis:</label>
+                <textarea th:field="*{sinopsis}" class="form-control" id="sinopsis" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="fechaEstreno">Fecha de Estreno:</label>
+                <input type="date" th:field="*{fechaEstreno}" class="form-control" id="fechaEstreno" required>
+            </div>
+
+            <div class="form-group">
+                <label for="youtubeTrailerId">ID del Trailer de YouTube:</label>
+                <input type="text" th:field="*{youtubeTrailerId}" class="form-control" id="youtubeTrailerId" required>
+            </div>
+
+            <div class="form-group">
+                <label for="genero">Género:</label>
+                <select th:field="*{generos}" class="form-control" id="genero" multiple="multiple">
+                    <!-- Iterate over the list of available genres and create options -->
+                    <option th:each="gen : ${generos}" th:value="${gen.id}" th:text="${gen.titulo}"></option>
+                </select>
+            </div>
+
+            <!-- Otros campos del formulario según sea necesario -->
+
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+    </div>
+
+    <!-- Agrega los enlaces a los scripts de Bootstrap y jQuery (opcional, pero a menudo necesario) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

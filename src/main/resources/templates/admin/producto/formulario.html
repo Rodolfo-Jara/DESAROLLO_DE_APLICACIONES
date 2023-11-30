@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Producto</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div th:replace="~{master :: nav}"></div>
+
+<div class="container mt-5">
+    <h2>Formulario de Producto</h2>
+    <form th:action="@{/admin/productos/producto/nuevo}" method="post" enctype="multipart/form-data">
+        <!-- Aquí van tus campos del formulario -->
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" th:field="${producto.nombre}" required>
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" class="form-control" th:field="${producto.descripcion}" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="portada">Portada:</label>
+            <input type="file" id="portada" name="portada" class="form-control" required>
+        </div>
+        <!-- Agrega más campos según tus necesidades -->
+
+        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+    </form>
+</div>
+
+</body>
+</html>

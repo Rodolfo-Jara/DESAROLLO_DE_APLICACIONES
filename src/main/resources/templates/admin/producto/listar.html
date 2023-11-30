@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Productos</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content">
+<div class="container">
+
+    <div class="row mt-3">
+        <div class="col-md-6 offset-md-6">
+            <form th:action="@{/productos}" method="get" class="form-inline">
+                <input type="text" name="descripcion" class="form-control mr-sm-2" placeholder="Buscar por descripción" th:value="${descripcion}">
+                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+            </form>
+        </div>
+    </div>
+
+    <h1 class="my-4">Listado de Productos</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>imagen</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="producto : ${productos.content}">
+            <td th:text="${producto.codigo}"></td>
+            <td th:text="${producto.descripcion}"></td>
+            <td th:text="${producto.precio}"></td>
+            <td>
+				<img th:src="${producto.imagen}" width="50px" height="50px">
+			</td>
+            <td>
+                <a th:href="@{/admin/productos/editar/{id}(id=${producto.codigo})}" class="btn btn-primary">Editar</a>
+                <a th:href="@{/admin/productos/eliminar/{id}(id=${producto.codigo})}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/admin/productos/nuevo}" class="btn btn-success">Agregar nuevo producto</a>
+
+    <div th:if="${productos.totalPages > 1}">
+        <ul class="pagination">
+            <li th:class="${productos.first ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{/productos(page=${productos.number - 1})}">Anterior</a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(0, productos.totalPages - 1)}"
+                th:class="${productos.number == i ? 'active' : ''}">
+                <a class="page-link" th:href="@{/productos(page=${i})}"
+                   th:text="${i + 1}"></a>
+            </li>
+            <li th:class="${productos.last ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{/productos(page=${productos.number + 1})}">Siguiente</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+</body>
+</html>

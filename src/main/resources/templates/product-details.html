@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{master.html}">
+<head>
+    <!-- Add any necessary meta tags, title, and styles -->
+    <meta charset="utf-8">
+    <title>Detalles del Producto</title>
+    <!-- Add your stylesheets or inline styles here -->
+</head>
+<body>
+
+<div layout:fragment="content">
+	
+     <div class="card shadow-lg" style="text-decoration:none;">
+		<form method="post" action="/carrito/agregar-al-carrito" th:action="@{/carrito/agregar-al-carrito}" th:object="${carrito}">
+        <div class="card-body">
+			<img th:src="${producto.imagen}"class="card-img-top">
+            <h1 th:text="${producto.descripcion}"></h1>
+            <h1 th:text="${producto.precio}"></h1>
+            
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" name="cantidad" value="1" min="1">
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

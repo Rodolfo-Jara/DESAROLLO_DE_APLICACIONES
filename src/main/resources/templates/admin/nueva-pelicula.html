@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{master.html}">
+
+<head>
+    <meta charset="utf-8">
+    <title>Registro de películas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyET3TcVlwwg6K8xGqtk6t9tDdi1A0T+Q" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div layout:fragment="content" class="container mt-5">
+        <h2 class="mb-4">Registro de película</h2>
+
+        <form th:object="${pelicula}" th:action="@{/admin/save}" method="post" enctype="multipart/form-data">
+
+            <!-- Title -->
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título:</label>
+                <input type="text" id="titulo" name="titulo" class="form-control" th:field="*{titulo}" required>
+            </div>
+
+            <!-- Sinopsis -->
+            <div class="mb-3">
+                <label for="sinopsis" class="form-label">Sinopsis:</label>
+                <textarea id="sinopsis" name="sinopsis" class="form-control" th:field="*{sinopsis}" required></textarea>
+            </div>
+
+            <!-- Fecha de Estreno -->
+            <div class="mb-3">
+                <label for="fechaEstreno" class="form-label">Fecha de Estreno:</label>
+                <input type="date" id="fechaEstreno" name="fechaEstreno" class="form-control"
+                    th:field="*{fechaEstreno}" required>
+            </div>
+
+            <!-- YouTube Trailer ID -->
+            <div class="mb-3">
+                <label for="youtubeTrailerId" class="form-label">YouTube Trailer ID:</label>
+                <input type="text" id="youtubeTrailerId" name="youtubeTrailerId" class="form-control"
+                    th:field="*{youtubeTrailerId}" required>
+            </div>
+
+            <!-- Genre Selection (ComboBox) -->
+            <div class="mb-3">
+                <label for="generos" class="form-label">Géneros:</label>
+                <select id="generos" name="generos" multiple="multiple" class="form-select" th:field="*{generos}"
+                    required>
+                    <option th:each="genero : ${generos}" th:value="${genero.id}" th:text="${genero.titulo}"></option>
+                </select>
+            </div>
+
+            <!-- Portada (File Upload) -->
+            <div class="mb-3">
+                <label for="portada" class="form-label">Portada:</label>
+                <input type="file" id="portada" name="portada" class="form-control" th:field="*{portada}" required>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit" class="btn btn-primary">Guardar Película</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8FDEQI2dKPhQf/nbRV+O/M9fNtOJf82BhSuKUtbQy"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
